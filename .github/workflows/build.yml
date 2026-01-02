@@ -1,0 +1,56 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            src:
+              - "scripts/*"
+              - "src/**/*.ts"
+              - "styles/**/*.ts"
+              - "themes/*.css.ts"
+              - "vite.config.ts"
+              - "package.json"
+
+      - name: Build theme
+        id: build
+        if: steps.changes.outputs.src == 'true'
+        run: |
+          npm run install:vite8
+          npm run build
+
+      - name: Upload css assets
+        if: steps.build.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: themes
+          path: dist/*.css
+
+      - name: Upload templates assets
+        if: steps.build.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: templates
+          path: templates
+
+      - name: Build locales
+        id: locales
+        if: steps.build.outcome =='success'
+        run: npm run tr
+
+      - name: Upload locales assets
+        if: steps.locales.outcome =='success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: locales
+          path: dist/options/locale

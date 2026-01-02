@@ -275,6 +275,11 @@ export const prBranch = css`
   }
 `;
 
+const botLabelStyle = {
+  height: "20px",
+  padding: "0 6px!important",
+  marginLeft: "4px",
+};
 // 评论
 export const comment = css`
   .comment .comment-container {
@@ -299,6 +304,26 @@ export const comment = css`
     .comment-header {
       padding: 4px 4px 4px 16px;
       min-height: 38px;
+      .comment-header-left {
+        // bot 标签
+        .ui.basic.label {
+          ${botLabelStyle}
+        }
+        a:has(relative-time){
+          text-decoration: underline;
+        }
+        // 已编辑按钮
+        .content-history-menu {
+          color: ${themeVars.color.text.light.num1} !important;
+          .menu .item {
+            font-size: 12px;
+            .ui.avatar {
+              height: 20px;
+              width: 20px;
+            }
+          }
+        }
+      }
     }
     .comment-header-right {
       > .item,
@@ -311,12 +336,6 @@ export const comment = css`
         height: 20px;
         padding: 0 6px;
       }
-      // 隐藏顶部菜单的表情按钮
-      // 无法使用此样式, 评论无表情时底部的表情按钮元素不会渲染, 这是一个先有鸡还是先有蛋的问题
-      // 很蛋疼, 希望 Gitea 早日使用 Github 的样式, 因为 Github 的更合理, 无论是操作的方便程度还是按钮的冗余度
-      // .ui.dropdown.action.select-reaction {
-      //   display: none;
-      // }
       .context-dropdown {
         height: 28px;
         padding: 0 6px;
@@ -412,7 +431,6 @@ export const prMerge = css`
   .repository.view.issue .comment-list .timeline-item.pull-merge-box {
     // 头像
     .timeline-avatar {
-      color: ${themeVars.color.white} !important;
       border-radius: 9999px;
       width: 40px;
       height: 40px;
@@ -423,34 +441,67 @@ export const prMerge = css`
         width: 24px;
         height: 24px;
       }
-      // 可以合并
-      &.green {
-        background-color: ${themeVars.github.bgColor.success.emphasis};
+      // PR 界面的 PR 操作评论
+      &.text {
+        color: ${themeVars.color.white} !important;
         border-radius: ${otherThemeVars.border.radius};
-        // 操作评论边框色
+        // 操作评论边框
         + .content > .ui.attached.segment {
-          border-left-color: ${themeVars.github.bgColor.success.emphasis};
-          border-right-color: ${themeVars.github.bgColor.success.emphasis};
-          &:first-child {
-            border-top-color: ${themeVars.github.bgColor.success.emphasis};
-          }
-          &:last-child {
-            border-bottom-color: ${themeVars.github.bgColor.success.emphasis};
+          border-width: 1.5px;
+        }
+        &.grey {
+          background-color: ${themeVars.color.text.light.num1};
+        }
+        &.green {
+          background-color: ${themeVars.github.bgColor.success.emphasis};
+          + .content > .ui.attached.segment {
+            border-left-color: ${themeVars.github.bgColor.success.emphasis};
+            border-right-color: ${themeVars.github.bgColor.success.emphasis};
+            &:first-child {
+              border-top-color: ${themeVars.github.bgColor.success.emphasis};
+            }
+            &:last-child {
+              border-bottom-color: ${themeVars.github.bgColor.success.emphasis};
+            }
           }
         }
-      }
-      // 已合并
-      &.purple {
-        background-color: ${themeVars.github.bgColor.done.emphasis};
-        border-radius: ${otherThemeVars.border.radius};
-        + .content > .ui.attached.segment {
-          border-left-color: ${themeVars.github.bgColor.done.emphasis};
-          border-right-color: ${themeVars.github.bgColor.done.emphasis};
-          &:first-child {
-            border-top-color: ${themeVars.github.bgColor.done.emphasis};
+        &.purple {
+          background-color: ${themeVars.github.bgColor.done.emphasis};
+          + .content > .ui.attached.segment {
+            border-left-color: ${themeVars.github.bgColor.done.emphasis};
+            border-right-color: ${themeVars.github.bgColor.done.emphasis};
+            &:first-child {
+              border-top-color: ${themeVars.github.bgColor.done.emphasis};
+            }
+            &:last-child {
+              border-bottom-color: ${themeVars.github.bgColor.done.emphasis};
+            }
           }
-          &:last-child {
-            border-bottom-color: ${themeVars.github.bgColor.done.emphasis};
+        }
+        &.yellow {
+          background-color: ${themeVars.github.bgColor.attention.emphasis};
+          + .content > .ui.attached.segment {
+            border-left-color: ${themeVars.github.bgColor.attention.emphasis};
+            border-right-color: ${themeVars.github.bgColor.attention.emphasis};
+            &:first-child {
+              border-top-color: ${themeVars.github.bgColor.attention.emphasis};
+            }
+            &:last-child {
+              border-bottom-color: ${themeVars.github.bgColor.attention.emphasis};
+            }
+          }
+        }
+        &.red {
+          background-color: ${themeVars.github.bgColor.danger.emphasis};
+          + .content > .ui.attached.segment {
+            border-left-color: ${themeVars.github.bgColor.danger.emphasis};
+            border-right-color: ${themeVars.github.bgColor.danger.emphasis};
+            &:first-child {
+              border-top-color: ${themeVars.github.bgColor.danger.emphasis};
+            }
+            &:last-child {
+              border-bottom-color: ${themeVars.github.bgColor.danger.emphasis};
+            }
           }
         }
       }
@@ -494,11 +545,9 @@ export const prMerge = css`
       padding: 16px;
       display: grid;
       gap: 8px;
-      &.no-header {
-        &::before,
-        &::after {
-          display: none;
-        }
+      &::before,
+      &::after {
+        display: none;
       }
     }
   }
@@ -515,7 +564,7 @@ export const timeline = css`
       }
       .timeline-item,
       .timeline-item-group {
-        padding: 16px 0;
+        padding: 12px 0;
         .comment-text-line {
           color: ${themeVars.color.text.light.num1};
         }
@@ -523,9 +572,19 @@ export const timeline = css`
         &.event {
           // 修复覆盖后的位置问题
           padding-left: 15px;
-          .avatar {
+          // 避免锚中批准的头像
+          .avatar-with-link .avatar {
             width: 20px;
             height: 20px;
+          }
+          // 批准时间的头像
+          // 头部居中偏移量(头像高度 - 标准行信息高度) / 2: (40px - 32px) / 2 = 4px
+          .timeline-avatar {
+            top: -4px;
+          }
+          // bot 标签
+          .comment-text-line .ui.basic.label {
+            ${botLabelStyle}
           }
           .badge {
             border: 2px solid ${themeVars.color.body};
@@ -592,6 +651,8 @@ export const issueSidebar = css`
           color: ${themeVars.color.text.light.num1};
           font-size: 12px;
         }
+        // WIP 前缀提示
+        > a,
         .ui.dropdown.select-branch,
         .ui.form,
         a.fixed-text.muted,
@@ -624,6 +685,18 @@ export const issueSidebar = css`
           .ui.list {
             margin-top: 0 !important;
             margin-bottom: 0 !important;
+          }
+          // 评审人
+          .ui.relaxed.list {
+            .item {
+              // 操作图标按钮
+              a.muted.icon {
+                color: ${themeVars.color.text.light.num1};
+                &:hover {
+                  color: ${themeVars.color.primary.self};
+                }
+              }
+            }
           }
           // 标签菜单项
           .ui.dropdown > .menu > .scrolling.menu > .item:has(.item-secondary-info) {

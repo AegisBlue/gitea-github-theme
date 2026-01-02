@@ -139,13 +139,21 @@ export const runWorkflow = css`
 export const actionViewHeader = css`
   .action-view-header {
     .action-commit-summary {
+      a:hover {
+        text-decoration: inherit;
+      }
+      // 提前哈希
+      > a.muted:first-of-type {
+        text-decoration: underline;
+      }
       // 分支标签按钮
-      .ui.label {
+      .ui.ui.ui.label {
         background-color: ${themeVars.github.bgColor.accent.muted};
+        border-radius: ${otherThemeVars.border.radius};
         color: ${themeVars.github.fgColor.accent};
-        font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace);
-        font-weight: 400;
         > a {
+          font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+          font-weight: 400;
           opacity: 1;
         }
       }
@@ -155,9 +163,10 @@ export const actionViewHeader = css`
 
 // 工作流左侧作业列表
 export const actionViewLeft = css`
-  .action-view-left {
+  .action-view-left.action-view-left.action-view-left {
     margin-right: 28px;
     border-top: 1px solid ${themeVars.color.console.border};
+    max-width: 22vw;
     &:before {
       content: "Jobs";
       color: ${themeVars.color.console.fg.subtle};
