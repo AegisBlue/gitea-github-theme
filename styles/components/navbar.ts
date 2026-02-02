@@ -3,7 +3,6 @@ import { css, customThemeVars, otherThemeVars, themeVars } from "src/types/vars"
 
 export const navbarRight = css`
   #navbar {
-    border-bottom: 0;
     padding: 8px 16px; // 上下内边距 + .navbar-left & .navbar-right 的 min-height = 64px
     min-height: 64px;
     .navbar-left,
