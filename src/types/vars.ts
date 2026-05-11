@@ -1,5 +1,24 @@
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { createGlobalThemeContract } from "@vanilla-extract/css";
-import * as color from "./color";
+import color from "./color";
 
 function varMapper(prefix: string | null = null) {
   return (value: string | null, path: string[]) => {
@@ -14,8 +33,7 @@ function varMapper(prefix: string | null = null) {
 }
 
 const vars = {
-  isDarkTheme: "is-dark-theme",
-  chroma: color.chroma,
+  /** Gitea 主题的属性 */
   color: {
     ...color.other,
     ...color.message,
@@ -30,7 +48,7 @@ const vars = {
   github: color.github,
 };
 
-const otherVars = { border: { radius: null }, color: { ...color.otherAuto } };
+const otherVars = { border: { radius: null }, color: { ...color.otherAuto }, checkbox: { size: null } };
 
 const customVars = {
   branchMenuWidth: "branch-menu-width",
@@ -41,13 +59,9 @@ const customVars = {
   org: { repolistColumns: "org-repolist-columns", userlistColumns: "org-userlist-columns" },
 };
 
-const themeInfo = {
-  version: null,
-};
-
 export const themeVars = createGlobalThemeContract(vars, varMapper());
 export const otherThemeVars = createGlobalThemeContract(otherVars, varMapper());
 export const customThemeVars = createGlobalThemeContract(customVars, varMapper("custom"));
-export const themeInfoVars = createGlobalThemeContract(themeInfo, varMapper("theme"));
-
-export { css } from "@linaria/core";
+export const chromaVars = createGlobalThemeContract(color.chroma, varMapper("chroma"));
+export const codeMirrorVars = createGlobalThemeContract(color.codeMirror, varMapper("codeMirror"));
+export const syntaxVars = createGlobalThemeContract(color.syntax, varMapper("color-syntax"));

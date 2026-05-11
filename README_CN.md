@@ -31,15 +31,12 @@ Gitea 理论上小版本号变更不会修改前端布局, 所以主题的小版
 
 仅维护项目发布中的最新的 Gitea 版本, 其他旧版本主题不接受 Issue 和 PR.
 
-> 开发阶段的主题版本号格式: `1.大版本号.小版本号.时间戳`
-
-### 主题版本发布规则
-
-- 当 Gitea 发布小版本时, 主题中间如有变更, 则发布新的和 Gitea 小版本相同的主题版本
-- 当 Gitea 发布大版本时, 主题中间如有变更, 会发布 `1.旧大版本号.latest` 的主题版本并不再维护旧版本
-- 适配大版本的预发布版本为 `1.大版本号.rc`, 当无明显 BUG 时发布与 Gitea 大版本相同的主题版本
-
 ## 安装
+
+> [!IMPORTANT]
+>
+> 因为项目使用了 Lighting CSS 转译 CSS 嵌套代码, 所以会包含大量 :is() 选择器, 不支持 Chrome
+> 88 版本以下的浏览器使用 Chrome 88 以下的浏览器可能会出现大量样式问题, 请更新到 Chrome 88 以上版本
 
 1. 在发布页下载最新的 CSS 主题文件放入 `data/gitea/public/assets/css` 目录下 (默认可能没有此目录需手动创建)
 2. 修改 `data/gitea/conf/app.ini`，并将 CSS 文件名去掉 `theme-` 的名称附加到 `[ui]` 下的 `THEMES` 末尾
@@ -69,7 +66,8 @@ THEMES = gitea-auto, gitea-light, gitea-dark, github-auto, github-light, github-
 
 > [!IMPORTANT]
 >
-> 模板修改了 Gitea 的布局, 使其更接近 GitHub 的布局, 请勿跨版本使用模板文件, 可能会导致功能缺失等问题
+> 模板修改了 Gitea 的布局, 使其更接近 GitHub 的布局, 请勿跨版本使用模板文件, 可能会导致功能缺失,
+> Gitea 实例无法启动等问题
 >
 > 模板布局跟 Gitea 实例绑定, 所有主题都会生效, 会影响其他非本项目的主题的体验
 

@@ -1,8 +1,31 @@
-import type { MapLeafNodes } from "src/core/types";
-import * as color from "./color";
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-/** 代码高亮色 */
+import type { MapLeafNodes } from "src/core";
+import color from "./color";
+
+/** GitHub 预览代码高亮色 */
 export type Chroma = MapLeafNodes<typeof color.chroma, string>;
+/** GitHub 编辑代码高亮色 */
+export type CodeMirror = MapLeafNodes<typeof color.codeMirror, string>;
+/** Gitea 代码高亮色 */
+export type Syntax = MapLeafNodes<typeof color.syntax, string>;
 /** 主色调(强调色) */
 export type Primary = MapLeafNodes<typeof color.primary, string>;
 /** 副色调(边框色) */
@@ -21,3 +44,5 @@ export type Diff = MapLeafNodes<typeof color.diff, string>;
 export type Other = MapLeafNodes<typeof color.other, string>;
 /** 仅限本主题的 Github 颜色 */
 export type Github = MapLeafNodes<typeof color.github, string>;
+
+export { chromaVars, codeMirrorVars, customThemeVars, otherThemeVars, syntaxVars, themeVars } from "./vars";

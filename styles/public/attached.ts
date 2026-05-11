@@ -1,14 +1,34 @@
-import { css, otherThemeVars, themeVars } from "src/types/vars";
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { css } from "@linaria/core";
+import { otherThemeVars, themeVars } from "src";
 
 export const attached = css`
-  // 设置右面板的内容
+  /* 设置右面板的内容 */
   .user-main-content,
   .repo-setting-content,
   .user-setting-content,
   .org-setting-content,
   .admin-setting-content,
-  // 仓库动态页面
-  // 新建页面内容
+  /* 仓库动态页面 */
+  /* 新建页面内容 */
   .page-content.repository.new-repo,
   .page-content.repository.new.migrate,
   .page-content.repository.new.fork,
@@ -33,9 +53,15 @@ export const attached = css`
       border-bottom-right-radius: 0 !important;
       border: 1px solid ${themeVars.color.light.border} !important;
       + .ui.attached.segment {
-        border-top: 0 !important;
+        border-top-width: 0 !important;
         border-top-left-radius: 0 !important;
         border-top-right-radius: 0 !important;
+      }
+      /* 隐藏的元素下面的元素, 目前仅适用于在后台控制中的自我检查 */
+      &.tw-hidden + .ui.attached.segment {
+        border-top-width: 1px !important;
+        border-top-left-radius: ${otherThemeVars.border.radius} !important;
+        border-top-right-radius: ${otherThemeVars.border.radius} !important;
       }
       &:has(+ :not(.ui.attached.segment)),
       &:last-child {

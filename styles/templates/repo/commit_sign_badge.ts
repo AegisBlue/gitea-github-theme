@@ -1,7 +1,27 @@
-import { css, otherThemeVars, themeVars } from "src/types/vars";
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { css } from "@linaria/core";
+import { otherThemeVars, themeVars } from "src";
 
 export const commitSignBadge = css`
-  a.ui.label.commit-id-short.github-theme-commit-sha {
+  a.ui.label.commit-id-short.gitea-github-theme-commit-sha {
     gap: 8px;
     padding: unset;
     margin: unset;
@@ -15,7 +35,7 @@ export const commitSignBadge = css`
         margin: unset;
       }
     }
-    .github-theme-sha {
+    .gitea-github-theme-sha {
       border-radius: ${otherThemeVars.border.radius};
       font-family:
         -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji",
@@ -23,7 +43,7 @@ export const commitSignBadge = css`
       font-weight: 500;
       padding: 0px 8px;
       height: 26px;
-      min-width: 85px; // 非等宽字体导致不对齐, 目前看到最大长度为 83px
+      min-width: 85px; /* 非等宽字体导致不对齐, 目前看到最大长度为 83px */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -32,7 +52,7 @@ export const commitSignBadge = css`
       }
     }
   }
-  .ui.label.commit-sign-badge.github-theme-commit-sign-badge {
+  .ui.label.commit-sign-badge.gitea-github-theme-commit-sign-badge {
     font-family:
       -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji";

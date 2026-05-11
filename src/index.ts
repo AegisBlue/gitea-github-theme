@@ -1,5 +1,29 @@
-export { defaultDarkChroma, defaultLightChroma } from "./core/chroma";
-export { defineTheme, type ThemeColor } from "./core/color";
-export type { Theme } from "./core/theme";
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import selectors from "./selectors";
+
+export { createTheme, defineTheme, display2GitHubColor, github2ThemeColor } from "./core";
+export type { DisplayColor, GitHubColor, GitHubSyntax, ThemeColor } from "./core";
+export { extractVarName, scaleColorLight } from "./functions";
+export { createThemeMetaInfo } from "./styles";
+export { chromaVars, customThemeVars, otherThemeVars, syntaxVars, themeVars } from "./types";
 export type { Ansi, Chroma, Console, Diff, Github, Message, Named, Other, Primary, Secondary } from "./types";
-export { otherThemeVars, themeVars } from "./types/vars";
+export { defineThemeConfig } from "./vite-plugin";
+export { selectors };

@@ -1,9 +1,27 @@
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { rgba, saturate } from "polished";
 import { scaleColorLight } from "src/functions";
-import type { Ansi, Chroma, Console, Diff, Github, Message, Named, Other, Primary, Secondary } from "src/types";
-import { themeVars } from "src/types/vars";
-import { defaultDarkChroma, defaultLightChroma } from "./chroma";
-import type { Theme } from "./theme";
+import type { Ansi, Console, Diff, Github, Message, Named, Other, Primary, Secondary } from "src/types";
+import { themeVars } from "src/types";
+import type { GiteaColor } from "./theme";
 
 export type ThemeColor = {
   /** 用于标识当前是否为暗色主题: `true` 暗色 `false` 亮色 */
@@ -59,32 +77,7 @@ export type ThemeColor = {
   github: Github;
 };
 
-/** 定义颜色, 用于生成颜色主题
- * @example
- * 文件名: "dark.css.ts"
- * import type { Console, Diff, Other, Github } from "src/types";
- * import { defineTheme, themeVars } from "src";
- *
- * const console: Console = {
- *   fg: {
- *     self: "#f0f6fc", // self 表示本身等于 --color-console-fg: #f0f6fc, 所有键名为 self 的都将被忽略
- *     subtle: themeVars.color.body, // 引用别的CSS变量等于 --color-console-fg-subtle: var(--color-body)
- *     num1: "rgb(125, 133, 144)", // 由于纯数字无法在 TS 中使用点调用, 采用 num 前缀等于 --color-console-fg-1: rgb(125, 133, 144)
- *   },
- *   ...
- * }
- * ...
- * export default defineTheme({
- *   isDarkTheme: true,
- *   primary: "#0969da",
- *   ...
- *   console,
- *   diff,
- *   other,
- *   github,
- * })
- */
-export function defineTheme(themeColor: ThemeColor, chroma?: Chroma): Theme {
+export function theme2GiteaColor(themeColor: ThemeColor): GiteaColor {
   const brightDir = themeColor.isDarkTheme ? -1 : 1;
 
   const primary: Primary = {
@@ -372,8 +365,7 @@ export function defineTheme(themeColor: ThemeColor, chroma?: Chroma): Theme {
   };
 
   return {
-    isDarkTheme: themeColor.isDarkTheme.toString(),
-    chroma: chroma || (themeColor.isDarkTheme ? defaultDarkChroma : defaultLightChroma),
+    isDarkTheme: themeColor.isDarkTheme,
     color: {
       primary,
       secondary,

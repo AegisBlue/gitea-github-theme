@@ -1,26 +1,46 @@
-import { css, themeVars } from "src/types/vars";
+/*!
+ * Copyright (c) https://github.com/lutinglt
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { css } from "@linaria/core";
+import { themeVars } from "src";
 
 export const org = css`
   .page-content.organization {
-    // 组织成员头像
+    /* 组织成员头像 */
     .members .ui.avatar {
       border-radius: 9999px;
     }
-    // 组织头像
+    /* 组织头像 */
     .org-avatar {
       margin: 8px 24px 16px 0px;
     }
-    // 组织信息
+    /* 组织信息 */
     #org-info {
-      margin-top: 8px; // 与头像对齐
+      margin-top: 8px; /* 与头像对齐 */
       gap: 8px;
-      // 组织名称
+      /* 组织名称 */
       > .ui.header {
         font-size: 24px;
         > .org-visibility {
           margin-left: 8px;
         }
-        // 组织页面的 RSS 订阅按钮
+        /* 组织页面的 RSS 订阅按钮 */
         .ui.label.button {
           padding: 4px 16px;
           .svg {
@@ -32,11 +52,11 @@ export const org = css`
           }
         }
       }
-      // 组织描述
+      /* 组织描述 */
       > .markup {
         color: ${themeVars.color.text.light.num1};
       }
-      // 组织信息
+      /* 组织信息 */
       > .meta {
         font-size: 12px;
         svg {
